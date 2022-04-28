@@ -2,8 +2,10 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
+import * as BooksAPI from './BooksAPI'
 
-const shelves = [
+/*const shelves = [
+  
   {
     shelfTitle: 'Currently Reading',
     books: [
@@ -54,6 +56,12 @@ const shelves = [
       }
     ]
   }
+]*/
+
+const shelves = [
+'Currently Reading',
+'Want to Read',
+'Read'
 ]
 
 class BooksApp extends React.Component {
@@ -64,7 +72,14 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books })
+    })
   }
 
   render() {
@@ -83,7 +98,7 @@ class BooksApp extends React.Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"/>
+                <input type="text" placeholder="Search by title or author" />
 
               </div>
             </div>
@@ -100,7 +115,7 @@ class BooksApp extends React.Component {
               <div>
                 {
                   shelves.map(
-                    (shelfData, index) => <Shelf data={shelfData} key={index} />
+                    (shelfData, index) => <Shelf books={this.state.books} data={shelfData} key={index} />
                   )
                 }
               </div>
