@@ -4,7 +4,7 @@ import Book from "./Book";
 
 class Shelf extends Component {
   render() {
-    const { data: {shelfTitle} } = this.props
+    const { data: {shelfTitle, shelfId} } = this.props
     const { books } = this.props
 
     return (
@@ -14,9 +14,14 @@ class Shelf extends Component {
           <ol className="books-grid">
             {
               books.map(
-                (book, index) => <li key={book.id}>
-                  <Book book={book} />
-                </li>
+                (book) => {
+                  console.log(book.shelf, shelfId)
+                  return String.valueOf(book.shelf) == String.valueOf(shelfId) ?
+                    <li key={book.id}>
+                      <Book book={book} />
+                    </li> :
+                    null
+                }
               )
             }
           </ol>

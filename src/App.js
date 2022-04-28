@@ -4,10 +4,25 @@ import './App.css'
 import Shelf from './Shelf'
 import * as BooksAPI from './BooksAPI'
 
+const shelves_old = [
+  {shelfTitle: 'Currently Reading'},
+  {shelfTitle: 'Want to Read'},
+  {shelfTitle: 'Read'}
+]
+
 const shelves = [
-{shelfTitle: 'Currently Reading'},
-{shelfTitle: 'Want to Read'},
-{shelfTitle: 'Read'}
+  {
+    shelfId: '"currentlyReading"',
+    shelfTitle: 'Currently Reading'
+  },
+  {
+    shelfId: '"wantToRead"',
+    shelfTitle: 'Want to Read'
+  },
+  {
+    shelfId: 'read',
+    shelfTitle: 'Read'
+  }
 ]
 
 class BooksApp extends React.Component {
@@ -23,6 +38,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
+//    console.log("Primo libro: ", this.state.books[2])
     return (
       <div className="app">
         {this.state.showSearchPage ? (
