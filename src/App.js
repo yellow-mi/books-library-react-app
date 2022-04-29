@@ -4,19 +4,13 @@ import './App.css'
 import Shelf from './Shelf'
 import * as BooksAPI from './BooksAPI'
 
-const shelves_old = [
-  {shelfTitle: 'Currently Reading'},
-  {shelfTitle: 'Want to Read'},
-  {shelfTitle: 'Read'}
-]
-
 const shelves = [
   {
-    shelfId: '"currentlyReading"',
+    shelfId: 'currentlyReading',
     shelfTitle: 'Currently Reading'
   },
   {
-    shelfId: '"wantToRead"',
+    shelfId: 'wantToRead',
     shelfTitle: 'Want to Read'
   },
   {
@@ -38,7 +32,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
-//    console.log("Primo libro: ", this.state.books[2])
+//    console.log("First book: ", this.state.books[2])
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -46,14 +40,6 @@ class BooksApp extends React.Component {
             <div className="search-books-bar">
               <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
               <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
                 <input type="text" placeholder="Search by title or author" />
 
               </div>

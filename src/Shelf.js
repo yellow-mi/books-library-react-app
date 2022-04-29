@@ -15,8 +15,7 @@ class Shelf extends Component {
             {
               books.map(
                 (book) => {
-                  console.log(book.shelf, shelfId)
-                  return String.valueOf(book.shelf) == String.valueOf(shelfId) ?
+                  return book.shelf == shelfId ?
                     <li key={book.id}>
                       <Book book={book} />
                     </li> :
