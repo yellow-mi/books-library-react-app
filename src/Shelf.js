@@ -15,7 +15,7 @@ class Shelf extends Component {
             {
               books.map(
                 (book) => {
-                  return book.shelf == shelfId ?
+                  return book.shelf === shelfId ?
                     <li key={book.id}>
                       <Book book={book} />
                     </li> :

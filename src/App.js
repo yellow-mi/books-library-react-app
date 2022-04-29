@@ -2,6 +2,7 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
+import SearchPage from './SearchPage'
 import * as BooksAPI from './BooksAPI'
 
 const shelves = [
@@ -31,23 +32,18 @@ class BooksApp extends React.Component {
     })
   }
 
+changeStatus = () => {
+  this.setState((prevState) => ({
+    showSearchPage: !prevState.showSearchPage
+  }))
+}
+
   render() {
 //    console.log("First book: ", this.state.books[2])
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" />
-
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+          <SearchPage changeStatus={this.changeStatus} />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -63,7 +59,7 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <a onClick={this.changeStatus}>Add a book</a>
             </div>
           </div>
         )}
