@@ -4,6 +4,8 @@ import './App.css'
 import Shelf from './Shelf'
 import SearchPage from './SearchPage'
 import * as BooksAPI from './BooksAPI'
+import { Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 const shelves = [
   {
@@ -32,19 +34,17 @@ class BooksApp extends React.Component {
     })
   }
 
-changeStatus = () => {
-  this.setState((prevState) => ({
-    showSearchPage: !prevState.showSearchPage
-  }))
-}
+  changeStatus = () => {
+    this.setState((prevState) => ({
+      showSearchPage: !prevState.showSearchPage
+    }))
+  }
 
   render() {
-//    console.log("First book: ", this.state.books[2])
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchPage changeStatus={this.changeStatus} />
-        ) : (
+        {/*<Routes>
+        <Route exact path="/" render={() => (*/}
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -59,10 +59,12 @@ changeStatus = () => {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={this.changeStatus}>Add a book</a>
+              {/*<Route path='/search' component={SearchPage} />*/}
+              <Link to='/search'>Add a book</Link>
             </div>
           </div>
-        )}
+        {/*)} />
+        </Routes>*/}
       </div>
     )
   }
