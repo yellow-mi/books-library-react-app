@@ -5,7 +5,7 @@ import Book from "./Book";
 class Shelf extends Component {
   render() {
     const { data: {shelfTitle, shelfId} } = this.props
-    const { books } = this.props
+    const { books, shelfChanged } = this.props
 
     return (
       <div className="bookshelf">
@@ -17,7 +17,7 @@ class Shelf extends Component {
                 (book) => {
                   return book.shelf === shelfId ?
                     <li key={book.id}>
-                      <Book book={book} />
+                      <Book book={book} shelfChanged={shelfChanged} />
                     </li> :
                     null
                 }

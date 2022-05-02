@@ -1,11 +1,8 @@
-import React from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Shelf from './Shelf'
-import SearchPage from './SearchPage'
 import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
-import { Routes, Route } from 'react-router-dom'
+import React from 'react'
+import Shelf from './Shelf'
 
 const shelves = [
   {
@@ -24,47 +21,45 @@ const shelves = [
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false,
     books: []
   }
 
-  componentDidMount() {
+  getAllBooks = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
     })
   }
 
-  changeStatus = () => {
-    this.setState((prevState) => ({
-      showSearchPage: !prevState.showSearchPage
-    }))
+  componentDidMount() {
+    this.getAllBooks()
+  }
+
+  shelfChanged = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(() => {
+      this.getAllBooks()
+    })
   }
 
   render() {
     return (
       <div className="app">
-        {/*<Routes>
-        <Route exact path="/" render={() => (*/}
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                {
-                  shelves.map(
-                    (shelfData, index) => <Shelf books={this.state.books} data={shelfData} key={index} />
-                  )
-                }
-              </div>
-            </div>
-            <div className="open-search">
-              {/*<Route path='/search' component={SearchPage} />*/}
-              <Link to='/search'>Add a book</Link>
+        <div className="list-books">
+          <div className="list-books-title">
+            <h1>MyReads</h1>
+          </div>
+          <div className="list-books-content">
+            <div>
+              {
+                shelves.map(
+                  (shelfData, index) => <Shelf books={this.state.books} data={shelfData} key={index} shelfChanged={this.shelfChanged} />
+                )
+              }
             </div>
           </div>
-        {/*)} />
-        </Routes>*/}
+          <div className="open-search">
+            <Link to='/search'>Add a book</Link>
+          </div>
+        </div>
       </div>
     )
   }
