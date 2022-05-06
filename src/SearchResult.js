@@ -8,13 +8,7 @@ export default function SearchResult(props) {
     <div className="search-books-results">
       <ol className="books-grid">
         {searchBooks.map(searchBook => {
-          // const keys = Object.keys(myBooks)
-          // keys.forEach(key => {
-            //   const ids = myBooks[key]
-            //   const found = ids.find(id => id === searchBook.id)
-            //   shelf = found ? key.trim() : null
-            //   shelf && console.log('shelf from search result: ', shelf)
-            // })
+
           let shelf = null
           let ids = myBooks.currentlyReading
           if (ids.find(id => id === searchBook.id)) shelf = 'currentlyReading'
