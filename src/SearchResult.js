@@ -10,12 +10,12 @@ export default function SearchResult(props) {
         {searchBooks.map(searchBook => {
 
           let shelf = null
-          let ids = myBooks.currentlyReading
-          if (ids.find(id => id === searchBook.id)) shelf = 'currentlyReading'
-          ids = myBooks.wantToRead
-          if (ids.find(id => id === searchBook.id)) shelf = 'wantToRead'
-          ids = myBooks.read
-          if (ids.find(id => id === searchBook.id)) shelf = 'read'
+
+          if (myBooks.currentlyReading.find(id => id === searchBook.id)) shelf = 'currentlyReading'
+
+          if (myBooks.wantToRead.find(id => id === searchBook.id)) shelf = 'wantToRead'
+
+          if (myBooks.read.find(id => id === searchBook.id)) shelf = 'read'
 
           return <li key={searchBook.id}>
             <Book

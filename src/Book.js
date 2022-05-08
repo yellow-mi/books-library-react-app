@@ -19,7 +19,7 @@ class Book extends Component {
   render() {
     const { book, shelf, shelfChanged } = this.props
     const thumbnail = book?.imageLinks?.thumbnail || ''
-    shelf && console.log('shelf from Book:', shelf)
+
 
     return (
       <div className="book">

@@ -21,13 +21,21 @@ export default class SearchPage extends Component {
 
     runSearch = () => {
         const query = this.state.searchQuery
+
+        if (query.length !== 0) {
+            
         BooksAPI.search(query, 10).then(books => {
             const newBooks = books || []
+
+            if(query.error) {
+                this.setState({searchBooks: []})
+            } else {
             this.setState((oldState) => ({
                 ...oldState,
                 searchBooks: newBooks
             }))
-        })
+        }})
+    } else { this.setState({ searchBooks: [] })}
     }
 
     shelfChanged = (book, newShelf) => {
