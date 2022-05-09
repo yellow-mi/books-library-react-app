@@ -15,26 +15,33 @@ export default class SearchPage extends Component {
         this.setState((oldState) => ({
             ...oldState,
             searchQuery: newQuery
-        }))
-        this.runSearch()
+        }), () => { this.runSearch() }
+        )
     }
+
+    /*
+        this.setState({ state }, () => {
+  doSomething();
+})
+    */
 
     runSearch = () => {
         const query = this.state.searchQuery
 
-        if (query.length !== 0) {     
-        BooksAPI.search(query, 10).then(books => {
-            const newBooks = books || []
+        if (query.length !== 0) {
+            BooksAPI.search(query, 10).then(books => {
+                const newBooks = books || []
 
-            if(books.error) {
-                this.setState({searchBooks: []})
-            } else {
-            this.setState((oldState) => ({
-                ...oldState,
-                searchBooks: newBooks
-            }))
-        }})
-    } else { this.setState({ searchBooks: [] })}
+                if (books.error) {
+                    this.setState({ searchBooks: [] })
+                } else {
+                    this.setState((oldState) => ({
+                        ...oldState,
+                        searchBooks: newBooks
+                    }))
+                }
+            })
+        } else { this.setState({ searchBooks: [] }) }
     }
 
     shelfChanged = (book, newShelf) => {
